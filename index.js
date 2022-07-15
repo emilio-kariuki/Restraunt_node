@@ -6,9 +6,11 @@ import dotenv from 'dotenv'
 dotenv.config()
 
 const PORT = process.env.PORT || 5000;
-
+//This code allows to set a function to the app of the express framework
 const app = express();
 app.use(bodyParser.json());
+
+// This code allows to connect to the mongo db database
 
 mongoose.connect(process.env.DATABASE, {
   useUnifiedTopology: true,
