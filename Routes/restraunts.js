@@ -2,11 +2,11 @@ import express from "express";
 import model from "../Model/restrauntModel.js";
 
 const router = express.Router();
-
+//This is the custom function to get a specific restraunt from the mongo db database
 router.get("/:id", getRestraunt, async (req, res) => {
   res.status(200).json(req.restraunt);
 });
-
+//This is the custom function to get all the users from the mongo db database
 router.get("/", async (req, res) => {
   try {
     await model.find({}).then((restraunts) => {
@@ -23,6 +23,8 @@ router.get("/", async (req, res) => {
     res.status(404).json({ message: "There was an error fetching the data" });
   }
 });
+
+//This is a function that allows to add a new restraunt to the mongo db database
 
 router.post("/", (req, res) => {
   const newRestraunt = new model({
@@ -43,6 +45,8 @@ router.post("/", (req, res) => {
     });
 });
 
+//this function allows to delete a restraunt from the database
+
 router.delete("/:id", getRestraunt, async (req, res) => {
   try {
     await req.restraunt.remove();
@@ -51,6 +55,8 @@ router.delete("/:id", getRestraunt, async (req, res) => {
     res.status(404).json({ messge: "The user has not been deleted" });
   }
 });
+
+//THis function allows us to make update to the data that is available in the database
 
 router.patch("/:id", getRestraunt, async (req, res) => {
   if (req.body.name != null) {
@@ -75,7 +81,7 @@ router.patch("/:id", getRestraunt, async (req, res) => {
     res.status(400).json({ message: error });
   }
 });
-
+//This is the custom function to get each user from the mongo db database
 async function getRestraunt(req, res, next) {
   let restraunt;
 
